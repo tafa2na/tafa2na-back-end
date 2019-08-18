@@ -78,7 +78,7 @@ class Vouguepay {
    var $fields = array();           // array holds the fields to submit to vouguepay
 
    
-   function vouguepay() {
+   function __construct() {
        
       // initialization constructor.  Called when class is created.
       $CI=& get_instance();

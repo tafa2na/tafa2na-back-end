@@ -332,6 +332,7 @@ class Vendor extends CI_Controller
             $data['color']              = json_encode($this->input->post('color'));
             $data['num_of_imgs']        = $num_of_imgs;
             $data['current_stock']      = $this->input->post('current_stock');
+            $data['alert_quantity']     = $this->input->post('alert_quantity');
             $data['front_image']        = 0;
             $additional_fields['name']  = json_encode($this->input->post('ad_field_names'));
             $additional_fields['value'] = json_encode($this->input->post('ad_field_values'));
@@ -396,6 +397,7 @@ class Vendor extends CI_Controller
             $data['shipping_cost']      = $this->input->post('shipping_cost');
             $data['tag']                = $this->input->post('tag');
             $data['color']              = json_encode($this->input->post('color'));
+            $data['alert_quantity']     = $this->input->post('alert_quantity');
             $data['num_of_imgs']        = $num + $num_of_imgs;
             $data['front_image']        = 0;
             $additional_fields['name']  = json_encode($this->input->post('ad_field_names'));

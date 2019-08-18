@@ -419,6 +419,24 @@ class Email_model extends CI_Model
             $this->do_email($from, $from_name, $row['email'], $subject, $msg);
         }       
     }
+
+    function email_vendor($to){
+        $CI =& get_instance();
+        $CI->load->model('crud_model');
+        
+        $from_name  = $this->db->get_where('general_settings', array('type' => 'system_name'))->row()->value;
+        $protocol   = $this->db->get_where('general_settings', array('type' => 'mail_status'))->row()->value;
+        if($protocol == 'smtp'){
+            $from   = $this->db->get_where('general_settings',array('type' => 'smtp_user'))->row()->value;
+        }
+        else if($protocol == 'mail'){
+            $from   = $this->db->get_where('general_settings', array('type' => 'system_email'))->row()->value;
+        }
+        $subject    = 'Quantity ALert';
+        $msg        = "Your Product Quantity is Low please check";
+
+        $this->do_email($from, $from_name, $to, $subject, $msg);
+    }
     
     /***custom email sender****/
 

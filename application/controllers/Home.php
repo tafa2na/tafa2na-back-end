@@ -3499,6 +3499,11 @@ class Home extends CI_Controller
         $grand_total     = $total + $vat + $shipping;
         $product_details = json_encode($carted);
 
+        // echo '<pre>';
+        // echo print_r($product_details);
+        // echo '</pre>';
+        // die();
+
         $this->db->where('user_id', $this->session->userdata('user_id'));
         $this->db->update('user', array(
             'langlat' => $this->input->post('langlat')
@@ -3804,7 +3809,31 @@ class Home extends CI_Controller
                     $data1['sale_id']      = $sale_id;
                     $data1['datetime']     = time();
                     $this->db->insert('stock', $data1);
+
+                    $current_stock     = $this->db->get_where('product', array(
+                        'product_id' => $value['id']
+                    ))->row()->current_stock;
+                    $alert_quantity = $this->db->get_where('product', array(
+                        'product_id' => $value['id']
+                    ))->row()->alert_quantity;
+
+                    $added_by = $this->db->get_where('product', array(
+                        'product_id' => $value['id']
+                    ))->row()->added_by;
+
+                    $vendor_email = $this->crud_model->get_vendor_email($added_by);
+
+                    
+
+                    // echo $added_by;
+                    // die();
+
+                    if($current_stock < $alert_quantity){
+                        // echo "Down";
+                        $this->email_model->email_vendor($vendor_email);
+                    }
                 }
+                // die();
                 $this->crud_model->digital_to_customer($sale_id);
                 $this->email_model->email_invoice($sale_id);
                 $this->cart->destroy();

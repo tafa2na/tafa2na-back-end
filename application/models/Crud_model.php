@@ -2482,6 +2482,14 @@ class Crud_model extends CI_Model
 
         return $query->num_rows() > 0;
     }
+
+    function get_vendor_email($added_by){
+        $added_by = json_decode($added_by);
+        $vendor_email = $this->db->get_where($added_by->type, array(
+                        'vendor_id' => $added_by->id
+                    ))->row()->email;
+        return $vendor_email;
+    }
 	
 }
 

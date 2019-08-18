@@ -54,6 +54,10 @@
  * NOTE: If you change these, also change the error_reporting() code below
  */
 	include_once './application/libraries/vendor/autoload.php';
+
+	// $_SERVER['CI_ENV'] = "development";
+	// echo $_SERVER['CI_ENV'];
+	// die();
 	
 	define('ENVIRONMENT', isset($_SERVER['CI_ENV']) ? $_SERVER['CI_ENV'] : 'production');
 	//define('CFG_TIME_ZONE', 'Asia/Dacca');
@@ -306,4 +310,6 @@ if ($error_reporting == 1) {
  *
  * And away we go...
  */
+// echo BASEPATH;
+// die();
 require_once BASEPATH.'core/CodeIgniter.php';

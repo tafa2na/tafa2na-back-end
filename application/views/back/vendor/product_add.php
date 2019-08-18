@@ -67,9 +67,9 @@
                                 </div>
                             </div>              
                             <div class="form-group btm_border">
-                                <label class="col-sm-4 control-label" for="demo-hor-11"><?php echo translate('tags');?></label>
+                                <label class="col-sm-4 control-label" for="demo-hor-11"><?php echo translate('keywords');?></label>
                                 <div class="col-sm-6">
-                                    <input type="text" name="tag" data-role="tagsinput" placeholder="<?php echo translate('tags');?>" class="form-control">
+                                    <input type="text" name="tag" data-role="tagsinput" placeholder="<?php echo translate('keywords');?>" class="form-control">
                                 </div>
                             </div>
                                             
@@ -125,6 +125,13 @@
                                 </div>
                                 <span class="btn"><?php echo currency('','def'); ?> / </span>
                                 <span class="btn unit_set"></span>
+                            </div>
+
+                            <div class="form-group btm_border">
+                                <label class="col-sm-4 control-label" for="demo-hor-7"><?php echo translate('alert_quantity');?></label>
+                                <div class="col-sm-4">
+                                    <input type="number" name="alert_quantity" id="alert_quantity" min='1' step='.01' placeholder="<?php echo translate('alert_quantity');?>" class="form-control required">
+                                </div>
                             </div>
                             
                             <div class="form-group btm_border">

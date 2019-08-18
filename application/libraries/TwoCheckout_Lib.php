@@ -18,7 +18,7 @@ class TwoCheckout_Lib {
 	var $submit_btn = '';		// Button Text
 	var $CI;
 	
-	function TwoCheckout_Lib()
+	function __construct()
 	{
 		$this->CI =& get_instance();
 		$this->CI->load->helper('url');

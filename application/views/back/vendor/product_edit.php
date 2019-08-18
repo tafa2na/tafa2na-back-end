@@ -183,6 +183,12 @@
                                 <span class="btn unit_set"><?php echo $row['unit']; ?></span>
                             </div>
                             <div class="form-group btm_border">
+                                <label class="col-sm-4 control-label" for="demo-hor-7"><?php echo translate('alert_quantity');?></label>
+                                <div class="col-sm-4">
+                                    <input type="number" name="alert_quantity" id="alert_quantity" min='1' step='.01' value="<?php echo $row['alert_quantity']; ?>" placeholder="<?php echo translate('alert_quantity');?>" class="form-control required">
+                                </div>
+                            </div>
+                            <div class="form-group btm_border">
                                 <label class="col-sm-4 control-label" for="demo-hor-8"><?php echo translate('shipping_cost');?></label>
                                 <div class="col-sm-4">
                                     <input type="number" name="shipping_cost" min='0' id="demo-hor-8" min='0' step='.01' value="<?php echo $row['shipping_cost']; ?>" placeholder="<?php echo translate('shipping_cost');?>" class="form-control">
