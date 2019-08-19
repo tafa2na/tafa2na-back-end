@@ -247,9 +247,10 @@
             $("#previewImg").html('');
             $(input.files).each(function () {
                 var reader = new FileReader();
+                reader.fileName = this.name;
                 reader.readAsDataURL(this);
                 reader.onload = function (e) {
-                    $("#previewImg").append("<div style='float:left;border:4px solid #303641;padding:5px;margin:5px;'><img height='80' src='" + e.target.result + "'></div>");
+                    $("#previewImg").append("<div style='float:left;border:4px solid #303641;padding:5px;margin:5px;'><img height='80' src='" + e.target.result + "'><input type='text' name='fileorder[]' placeholder='Order' class='form-control unit required'><input type='hidden' name='filename[]' value='"+e.target.fileName+"'></div>");
                 }
             });
         }

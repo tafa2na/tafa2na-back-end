@@ -366,15 +366,18 @@
             $("#previewImg").html('');
             $(input.files).each(function () {
                 var reader = new FileReader();
+                reader.fileName = this.name; // file came from a input file element. file = el.files[0];
+                // console.log(this);
                 reader.readAsDataURL(this);
                 reader.onload = function (e) {
-                    $("#previewImg").append("<div style='float:left;border:4px solid #303641;padding:5px;margin:5px;'><img height='80' src='" + e.target.result + "'></div>");
+                    // console.log(e.target.fileName);
+                    $("#previewImg").append("<div style='float:left;border:4px solid #303641;padding:5px;margin:5px;'><img height='80' src='" + e.target.result + "'><input type='text' name='fileorder[]' placeholder='Order' class='form-control unit required'><input type='hidden' name='filename[]' value='"+e.target.fileName+"'></div>");
                 }
             });
         }
     }
 
-     $('.delete-div-wrap .close').on('click', function() { 
+    $('.delete-div-wrap .close').on('click', function() { 
 	 	var pid = $(this).closest('.delete-div-wrap').find('img').data('id'); 
 		var here = $(this); 
 		msg = 'Really want to delete this Image?'; 
@@ -404,7 +407,7 @@
 				}); 
 			}; 
 		  }); 
-		});
+	});
 
     function other_forms(){}
 	

@@ -79,11 +79,34 @@ class Crud_model extends CI_Model
             }
         } elseif ($multi == 'multi') {
             $ib = 1;
-            foreach ($_FILES[$name]['name'] as $i => $row) {
+            foreach ($_FILES[$name]['tmp_name'] as $i => $row) {
                 $ib = $this->file_exist_ret($type, $id, $ib);
                 move_uploaded_file($_FILES[$name]['tmp_name'][$i], 'uploads/' . $type . '_image/' . $type . '_' . $id . '_' . $ib . $ext);
                 if ($no_thumb == '') {
                     $this->crud_model->img_thumb($type, $id . '_' . $ib, $ext);
+                }
+            }
+        }
+    }
+
+    function file_up_sort($name, $type, $id, $sort_array, $multi = '', $no_thumb = '', $ext = '.jpg')
+    {
+        if ($multi == '') {
+            move_uploaded_file($_FILES[$name]['tmp_name'], 'uploads/' . $type . '_image/' . $type . '_' . $id . $ext);
+            if ($no_thumb == '') {
+                $this->crud_model->img_thumb($type, $id, $ext);
+            }
+        } elseif ($multi == 'multi') {
+            $ib = 1;
+            foreach ($sort_array as $i => $img) {
+                foreach ($_FILES[$name]['tmp_name'] as $j => $row) {
+                    if($_FILES[$name]['name'][$j] === $img){
+                        $ib = $this->file_exist_ret($type, $id, $ib);
+                        move_uploaded_file($_FILES[$name]['tmp_name'][$j], 'uploads/' . $type . '_image/' . $type . '_' . $id . '_' . $ib . $ext);
+                        if ($no_thumb == '') {
+                            $this->crud_model->img_thumb($type, $id . '_' . $ib, $ext);
+                        }
+                    }
                 }
             }
         }

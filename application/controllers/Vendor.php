@@ -343,6 +343,18 @@ class Vendor extends CI_Controller
             $choice_types               = $this->input->post('op_type');
             $choice_no                  = $this->input->post('op_no');
             $data['added_by']           = json_encode(array('type'=>'vendor','id'=>$this->session->userdata('vendor_id')));
+
+            $fileorder = $this->input->post('fileorder');
+            $filename = $this->input->post('filename');
+            $file_sort_array = array();
+            if(count($fileorder) === count($filename)){
+                for($i=0, $count = count($fileorder);$i<$count;$i++) {
+                    $file_sort_array[$fileorder[$i]] = $filename[$i];
+                }
+            }
+            ksort($file_sort_array);
+            $file_sort_array = array_values($file_sort_array);
+
             if(count($choice_titles ) > 0){
                 foreach ($choice_titles as $i => $row) {
                     $choice_options         = $this->input->post('op_set'.$choice_no[$i]);
@@ -362,7 +374,9 @@ class Vendor extends CI_Controller
                     $this->db->insert('product', $data);
                     $id = $this->db->insert_id();
                     $this->benchmark->mark_time();
-                    $this->crud_model->file_up("images", "product", $id, 'multi');
+
+                    $this->crud_model->file_up_sort("images", "product", $id,  $file_sort_array, 'multi');
+                    // $this->crud_model->file_up("images", "product", $id, 'multi');
                 } else {
                     echo 'already uploaded maximum product';
                 }
@@ -371,7 +385,9 @@ class Vendor extends CI_Controller
                 $this->db->insert('product', $data);
                 $id = $this->db->insert_id();
                 $this->benchmark->mark_time();
-                $this->crud_model->file_up("images", "product", $id, 'multi');
+
+                $this->crud_model->file_up_sort("images", "product", $id,  $file_sort_array, 'multi');
+                // $this->crud_model->file_up("images", "product", $id, 'multi');
             }
             $this->crud_model->set_category_data(0);
             recache();
@@ -421,7 +437,20 @@ class Vendor extends CI_Controller
                 }
             }
             $data['options']            = json_encode($options);
-            $this->crud_model->file_up("images", "product", $para2, 'multi');
+
+            $fileorder = $this->input->post('fileorder');
+            $filename = $this->input->post('filename');
+            $file_sort_array = array();
+            if(count($fileorder) === count($filename)){
+                for($i=0, $count = count($fileorder);$i<$count;$i++) {
+                    $file_sort_array[$fileorder[$i]] = $filename[$i];
+                }
+            }
+            ksort($file_sort_array);
+            $file_sort_array = array_values($file_sort_array);
+
+            $this->crud_model->file_up_sort("images", "product", $para2,  $file_sort_array, 'multi');
+            // $this->crud_model->file_up("images", "product", $para2, 'multi');
             
             $this->db->where('product_id', $para2);
             $this->db->update('product', $data);
