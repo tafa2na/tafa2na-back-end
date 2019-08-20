@@ -1222,16 +1222,20 @@ class Home extends CI_Controller
 
         $this->form_validation->set_rules('sub', 'Subject', 'required');
         $this->form_validation->set_rules('reply', 'Message', 'required');
+        $this->form_validation->set_rules('product_id', 'Product', 'required');
 
         if ($this->form_validation->run() == FALSE)
         {
-            echo validation_errors();
+            $Content = validation_errors();
+            preg_match_all('|<p>(.*?)</p>|', $Content, $Output);
+            echo implode("#-#-#", $Output[1]);
         }
         else
         {
             if($safe == 'yes'){
                 $data['time']           = time();
                 $data['subject']        = $this->input->post('sub');
+                $data['product_id']        = $this->input->post('product_id');
                 $id                     = $this->session->userdata('user_id');
                 $data['from_where']     = json_encode(array('type'=>'user','id'=>$id));
                 $data['to_where']       = json_encode(array('type'=>'admin','id'=>''));

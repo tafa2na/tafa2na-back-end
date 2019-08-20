@@ -357,7 +357,7 @@ class Crud_model extends CI_Model
                 $multi = 'yes';
             }
         }
-        $return = '<select name="' . $name . '" onChange="' . $onchange . '(this.value,this)" class="' . $class . '" ' . $other . '  data-placeholder="' . $phrase . '" tabindex="2" data-hide-disabled="true" >';
+        $return = '<select name="' . $name . '" onChange="' . $onchange . '(this.value,this)" data-live-search="true" class="' . $class . '" ' . $other . '  data-placeholder="' . $phrase . '" tabindex="2" data-hide-disabled="true" >';
         if (!is_array($from)) {
             if ($condition == '') {
                 $all = $this->db->get($from)->result_array();

@@ -73,6 +73,13 @@
                                         	<input class="form-control" name="sub" type="text" placeholder="<?php echo translate('subject');?>">
                                         </div>
                                     </div>
+
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            <?php echo $this->crud_model->select_html('product','product_id','title','add','form-control selectpicker','','',NULL); ?>
+                                        </div>
+                                    </div>
+
                                     <div class="col-md-12">
                                         <label class="sr-only">
 											<?php echo translate('comment');?> *
@@ -99,5 +106,12 @@
 		var id = $(this).data('id');
 		$("#window").load("<?php echo base_url()?>home/profile/message_view/"+id);
 	});
+    $(document).ready(function(){
+        setTimeout(function(){
+            console.log("selectpicker");
+            $(".selectpicker").selectpicker();
+            // $( ".selectpicker" ).css( "border", "3px solid red" );
+        }, 1000);
+    });
 								
 </script>

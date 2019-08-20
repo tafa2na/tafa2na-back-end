@@ -660,6 +660,7 @@
 				button.html(ing); // change submit button text
 			},
 			success: function(data) {
+				// console.log(data);
 				var alls = data.split('#-#-#');
 				var part1 = alls[0];
 				var part2 = alls[1];
@@ -674,7 +675,13 @@
 					form.find('textarea').val('');
 					form.find('textarea').html('');
 				} else {
-					var text = '<div>'+unsuccessful+'</div>'+part2;
+					// console.log(part2);
+					
+					var text = '<div>'+unsuccessful+'</div>';
+					$.each( alls , function( key, value ) {
+						// alert( key + ": " + value );
+						text += '<div>'+value+'</div>';
+					});
 					notify(text,'warning','bottom','right');
 				}
 				button.html(prv);
